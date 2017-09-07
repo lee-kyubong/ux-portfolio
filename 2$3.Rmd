@@ -1,0 +1,115 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file).
+
+```{r}
+a <- c(TRUE, FALSE, FALSE, TRUE)
+b <- c(13, 7, 8, 2)
+b[a]
+!a
+a & (b-2)
+
+
+
+a & (b-2)
+#short-circuit evaluation
+#
+a && (b-2)
+```
+
+
+
+```{r}
+x <- (1:3)
+y <- x * 2
+plot(x, y); plot(y, x)
+
+
+```
+```{r}
+a <- c(3, 6, 9)
+a >4
+a == 6
+a >= 4
+a != 4
+a [a > 4] # 이게 신기. 6, 9
+
+b<- c(4, 6, 8)
+a > b
+plot(a,b)
+#setwd('c:/madata')
+
+dump('usefuldata', 'useful.R')
+source('useful.R')
+dump(list = objects(), 'all.R')
+dump(c('humudity', 'temp', 'rain'), 'weather.R')
+
+```
+```{r}
+str(VADeaths)
+head(VADeaths)
+barplot(VADeaths, beside = TRUE, legend = TRUE, ylim = c(0, 90),
+        ylab = 'Deathper 1000')
+
+dotchart(VADeaths, xlim = c(0, 75))
+
+gs = c(18, 32, 30, 10, 10)
+l = c("a", "b", "c", "d", "e")
+pie(gs, l)
+
+```
+```{r}
+x <- rnorm(10000)
+hist(x)
+```
+
+```{r}
+x <- rnorm(100)
+y <- rpois(100, 30)
+plot(sort(x), sort(y), type = 'l') #표본의 백분위수를 플롯
+```
+
+```{r}
+X <- rnorm(1000)
+A <- rnorm(1000, mean = 5, sd = 0.5)
+qqplot(X, A)
+
+# 고려해야할 점은 데이터의 유형이다. 
+# 막대그림, 점그림, 원그림은 개별 자료 요약
+# 히스토그램, 박스플롯, QQ 플롯은 자료의 분포.
+# 산점도는 쌍으로 이루어진 자료들을 이용하여 상관관계를 이해할 수 있게.
+
+```
+
+```{r}
+sex <- c("M", "F", "M", "F", "F", "M", "F", "M")
+length <- c(7.9, 6.5, 8.4, 5.5, 6.5, 8, 7, 7.5)
+width <- c(2.3, 1.7, 2.6, 1.7, 1.9, 2.1, 1.8, 1.9)
+test = data.frame(sex, length, width)
+plot(width ~ length, data = test)
+with(test[c(3, 7), ], points(length, width, pch = 16))
+par(mfrow = c(2, 2))
+plot(width ~ length, pch = as.character(sex), data = test)
+
+abline(lm(width ~length, data = test, subset = sex == 'M'), lty = 1)
+abline(lm(width ~length, data = test, subset = sex == 'F'), lty = 2)
+legend('topleft', legend = c('M', "F"), lty = 1:2)
+
+
+```
+
